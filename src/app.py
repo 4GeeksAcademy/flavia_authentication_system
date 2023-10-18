@@ -84,6 +84,8 @@ def handle_new_user():
         return jsonify({'msg':'Body must be filled'}), 400
     if 'email' not in body:
         return jsonify({'msg': 'Specify email'}), 400
+    if User.query.filter_by(email= body['email']).first():
+        return jsonify({'msg': 'There is already an account associated with that email'}), 200
     if 'password' not in body: 
         return jsonify({'msg': 'Specify password'}), 400
     pw_hash = bcrypt.generate_password_hash(body['password']).decode('utf-8')

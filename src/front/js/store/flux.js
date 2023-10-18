@@ -2,18 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			users: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -22,14 +11,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getMessage: async () => {
-				try{
+				try {
 					// fetching data from the backend
 					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
 					const data = await resp.json()
 					setStore({ message: data.message })
 					// don't forget to return something, that is how the async resolves
 					return data;
-				}catch(error){
+				} catch (error) {
 					console.log("Error loading message from backend", error)
 				}
 			},
@@ -46,7 +35,53 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
-			}
+			},
+			registerUser: async (newUser) => {
+				try {
+					const options = {
+						method: 'POST',
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(newUser)
+					}
+					const response = await fetch(`${process.env.BACKEND_URL}/signup`, options)
+					const data = await response.json()
+					if (response.ok) {
+						console.log(data.msg)
+					}
+				} catch (err) {
+					console.log(err)
+				}
+			},
+			logInUser: async (user) => {
+				try {
+					const options = {
+						method: 'POST',
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(user)
+					}
+					const response = await fetch(`${process.env.BACKEND_URL}/login`, options)
+					const data = await response.json()
+					if (response.ok) {
+						console.log(data.access_token)
+						sessionStorage.setItem('accessToken', data.access_token);
+					} else {
+						console.log(data.msg)
+					}
+				} catch (err) {
+					console.log(err)
+				}
+			},
+			myAccount: async () => {
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/my-account`)
+					const data = await response.json()
+					if (response.ok) {
+						return data
+					}
+				} catch (err) {
+					console.log(err)
+				}
+			},
 		}
 	};
 };
