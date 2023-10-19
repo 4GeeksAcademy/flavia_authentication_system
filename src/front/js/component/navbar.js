@@ -10,7 +10,7 @@ export const Navbar = () => {
 					<span className="navbar-brand mb-0 h1 text-white">React Boilerplate</span>
 				</Link>
 				<div className="ml-auto">
-					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+					<button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
 						Launch demo modal
 					</button>
 				</div>

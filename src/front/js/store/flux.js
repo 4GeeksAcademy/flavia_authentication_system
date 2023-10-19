@@ -71,9 +71,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(err)
 				}
 			},
-			myAccount: async () => {
+			myAccount: async (token) => {
 				try {
-					const response = await fetch(`${process.env.BACKEND_URL}/my-account`)
+					const options = {
+						method: 'GET',
+						headers: { 'Authorization': `Bearer ${token}` }
+					}
+					const response = await fetch(`${process.env.BACKEND_URL}/my-account`, options)
 					const data = await response.json()
 					if (response.ok) {
 						return data

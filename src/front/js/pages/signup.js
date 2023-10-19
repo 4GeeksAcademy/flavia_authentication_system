@@ -1,19 +1,19 @@
 import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
-import "../../styles/home.css";
+import { LogIn } from "./login.js";
+import "../../styles/login.css";
 
-export const logIn = () => {
+export const SignUp = () => {
 	const { store, actions } = useContext(Context)
 
 	const [newUser, setNewUser] = useState({
 		email: '',
 		password: '',
 	});
-	const [dontHave, setDontHave] = useState(false);
+	const [alreadyHave, setAlreadyHave] = useState(false);
 
-	const handleDontButton = () => {
-		setDontHave(!dontHave)
+	const handleAlreadyButton = () => {
+		setAlreadyHave(!alreadyHave)
 	}
 
 	const handleRegister = (e) => {
@@ -35,27 +35,33 @@ export const logIn = () => {
 	};
 
 	return (
-		<div className="signup-box">
-			<p>Login</p>
+		<>
+		{
+			alreadyHave ? <LogIn /> : <div className="login-box">
+			<div className="logTitle">
+				<h5 >Hello!</h5>
+				<p id="p"> Create an account</p>
+			</div>
 			<form onSubmit={handleSignUp}>
-				<div className="newUser-box">
-					<input required="" name="email" type="text" value={newUser.email} onChange={handleRegister}/>
+				<div className="user-box">
+					<input required="" name="email" type="text" value={newUser.email} onChange={handleRegister} />
 					<label>Email</label>
 				</div>
-				<div className="newUser-box">
+				<div className="user-box">
 					<input required="" name="password" type="password" value={newUser.password} onChange={handleRegister} />
 					<label>Password</label>
 				</div>
-				<a href="#">
+				<button type="submit" className="login-button">
 					<span></span>
 					<span></span>
 					<span></span>
 					<span></span>
-					Submit
-				</a>
+					Register
+				</button>
 			</form>
-			<p>Already have an account? <a href="" className="a2">Sign up!</a></p>
+			<p>Already have an account? <a className="a2" onClick={handleAlreadyButton}>Log in!</a></p>
 		</div>
-
+		}
+		</>
 	);
 };
