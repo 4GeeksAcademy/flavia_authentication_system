@@ -36,7 +36,10 @@ export const LogIn = () => {
 
 	return (
 		<div className="login-box">
-			<p>Login</p>
+			<div className="logTitle">
+				<h5 >Hello!</h5>
+				<p id="p"> Sign in to your account</p>
+			</div>
 			<form onSubmit={handleLogIn}>
 				<div className="user-box">
 					<input required="" name="email" type="text" value={user.email} onChange={handleLog} />
@@ -51,7 +54,7 @@ export const LogIn = () => {
 					<span></span>
 					<span></span>
 					<span></span>
-					Let's go
+					Log in
 				</button>
 			</form>
 			<p>Don't have an account? <a href="" className="a2">Sign up!</a></p>
