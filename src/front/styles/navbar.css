@@ -1,0 +1,16 @@
+
+.nav_btn {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.781);
+}
+
+.nav_btn:hover .fa-user {
+    text-shadow: 0 0 5px white;
+}
+
+.icon {
+    width: 10rem;
+    height: 5rem;
+    padding: 0;
+}
