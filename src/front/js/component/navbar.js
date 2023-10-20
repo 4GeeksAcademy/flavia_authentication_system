@@ -17,7 +17,7 @@ export const Navbar = () => {
 				</Link>
 				<div className="ml-auto">
 					<button type="button" className="nav_btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-						<i class="fa-regular fa-user"></i> Sign in
+						<i className="fa-regular fa-user"></i> Sign in
 					</button>
 				</div>
 			</div>

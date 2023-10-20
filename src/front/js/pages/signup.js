@@ -1,10 +1,14 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 import { LogIn } from "./login.js";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "../../styles/login.css";
 
 export const SignUp = () => {
 	const { store, actions } = useContext(Context)
+	const navigate = useNavigate();
 
 	const [newUser, setNewUser] = useState({
 		email: '',
@@ -24,44 +28,47 @@ export const SignUp = () => {
 		});
 	};
 
-	const handleSignUp = (e) => {
+	const handleSignUp = async (e) => {
 		e.preventDefault();
 		console.log('Formulario enviado:', newUser);
-		actions.registerUser(newUser)
+		const isSigned = await actions.registerUser(newUser)
 		setNewUser({
 			email: '',
 			password: '',
 		});
+		if (isSigned) {
+			navigate('/my-account')
+		}
 	};
 
 	return (
 		<>
-		{
-			alreadyHave ? <LogIn /> : <div className="login-box">
-			<div className="logTitle">
-				<h5 >Hello!</h5>
-				<p id="p"> Create an account</p>
-			</div>
-			<form onSubmit={handleSignUp}>
-				<div className="user-box">
-					<input required="" name="email" type="text" value={newUser.email} onChange={handleRegister} />
-					<label>Email</label>
+			{
+				alreadyHave ? <LogIn /> : <div className="login-box">
+					<div className="logTitle">
+						<h5 >Hello!</h5>
+						<p id="p"> Create an account</p>
+					</div>
+					<form onSubmit={handleSignUp}>
+						<div className="user-box">
+							<input required="" name="email" type="text" value={newUser.email} onChange={handleRegister} />
+							<label>Email</label>
+						</div>
+						<div className="user-box">
+							<input required="" name="password" type="password" value={newUser.password} onChange={handleRegister} />
+							<label>Password</label>
+						</div>
+						<button type="submit" className="login-button">
+							<span></span>
+							<span></span>
+							<span></span>
+							<span></span>
+							Register
+						</button>
+					</form>
+					<p>Already have an account? <a className="a2" onClick={handleAlreadyButton}>Log in!</a></p>
 				</div>
-				<div className="user-box">
-					<input required="" name="password" type="password" value={newUser.password} onChange={handleRegister} />
-					<label>Password</label>
-				</div>
-				<button type="submit" className="login-button">
-					<span></span>
-					<span></span>
-					<span></span>
-					<span></span>
-					Register
-				</button>
-			</form>
-			<p>Already have an account? <a className="a2" onClick={handleAlreadyButton}>Log in!</a></p>
-		</div>
-		}
+			}
 		</>
 	);
 };

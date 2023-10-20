@@ -47,6 +47,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const data = await response.json()
 					if (response.ok) {
 						console.log(data.msg)
+						return true
+					} else {
+						return false
 					}
 				} catch (err) {
 					console.log(err)
@@ -64,8 +67,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (response.ok) {
 						console.log(data.access_token)
 						sessionStorage.setItem('accessToken', data.access_token);
+						return true
 					} else {
 						console.log(data.msg)
+						return false
 					}
 				} catch (err) {
 					console.log(err)

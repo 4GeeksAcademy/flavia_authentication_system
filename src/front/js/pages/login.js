@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { SignUp } from "./signup.js";
 import "../../styles/login.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const LogIn = () => {
 	const { store, actions } = useContext(Context)
@@ -24,17 +26,25 @@ export const LogIn = () => {
 			[name]: value,
 		});
 	};
-	const handleLogIn = (e) => {
+	const handleLogIn = async (e) => {
 		e.preventDefault();
 		console.log('Inicio de sesión', user);
-		actions.logInUser(user)
+		const isLogged = await actions.logInUser(user)
 		setUser({
 			email: '',
 			password: '',
 		});
-		const accessToken = sessionStorage.getItem('accessToken');
-		if (accessToken) {
-			// Si el inicio de sesión es exitoso, navegar a la vista privada
+		if (isLogged) {
+			toast('🦄 Wow so easy!', {
+				position: "top-right",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "light",
+			});
 			navigate('/my-account');
 		};
 	};
