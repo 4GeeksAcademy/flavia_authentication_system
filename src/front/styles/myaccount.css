@@ -2,12 +2,11 @@
     height: 100vh;
 }
 .myAccountMain {
-    min-height: 87vh;
+    min-height: 90vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid black;
 }
 .containerMyAccount {
     display: flex;
