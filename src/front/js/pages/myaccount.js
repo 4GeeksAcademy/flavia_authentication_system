@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { LogIn } from "./login.js";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "../../styles/myaccount.css";
 
 export const MyAccount = () => {
@@ -20,6 +22,20 @@ export const MyAccount = () => {
 
     const handleLogOut = () => {
         sessionStorage.removeItem('accessToken');
+        toast('You are logged out. Come back soon!', {
+            position: "bottom-center",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            style: {
+                backgroundColor: "rgb(167, 130, 149)",
+                color: "white"
+            },
+        });
         navigate('/')
     }
     return (

@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import { LogIn } from "./login.js";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "../../styles/login.css";
 
@@ -37,8 +37,21 @@ export const SignUp = () => {
 			password: '',
 		});
 		if (isSigned) {
+			toast.success('You have created your account. Now log in!', {
+				position: "bottom-center",
+				autoClose: 2000,
+				hideProgressBar: true,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: "colored",
+				style: {
+					backgroundColor: "rgb(122, 157, 84)",
+				},
+			});
 			navigate('/my-account')
-		}
+		};
 	};
 
 	return (

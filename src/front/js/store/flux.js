@@ -1,8 +1,12 @@
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			message: null,
-			users: []
+			users: [],
+			navbar_button: false
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -49,6 +53,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(data.msg)
 						return true
 					} else {
+						toast.error(`${data.msg}`, {
+							position: "bottom-center",
+							autoClose: 2000,
+							hideProgressBar: true,
+							closeOnClick: true,
+							pauseOnHover: true,
+							draggable: true,
+							progress: undefined,
+							theme: "colored",
+							style: {
+								backgroundColor: "rgb(205, 92, 8)",
+							},
+						});
 						return false
 					}
 				} catch (err) {
@@ -69,7 +86,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 						sessionStorage.setItem('accessToken', data.access_token);
 						return true
 					} else {
-						console.log(data.msg)
+						toast.error(`Try again! ${data.msg}`, {
+							position: "bottom-center",
+							autoClose: 2000,
+							hideProgressBar: true,
+							closeOnClick: true,
+							pauseOnHover: true,
+							draggable: true,
+							progress: undefined,
+							theme: "colored",
+							style: {
+								backgroundColor: "rgb(205, 92, 8)",
+							},
+						});
 						return false
 					}
 				} catch (err) {
@@ -91,6 +120,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(err)
 				}
 			},
+			showForm: () => {
+				const store = getStore();
+				setStore({ navbar_button: !store.navbar_button })
+			}
 		}
 	};
 };

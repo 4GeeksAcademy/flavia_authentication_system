@@ -1,6 +1,4 @@
-body {
-  padding: 0;
-}
+
 .homeContainer {
     height: 100vh;
     --color: rgba(114, 114, 114, 0.3);
@@ -9,6 +7,10 @@ body {
         linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%,transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%,transparent);
     background-size: 55px 55px;
   }
-  .modal-backdrop {
-    position: initial;
+.homeContainer img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%)translateY(-50%);
+  border-radius: 10px;
 }

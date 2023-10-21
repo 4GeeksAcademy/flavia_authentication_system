@@ -82,11 +82,11 @@ def handle_new_user():
     body = request.get_json(silent=True)
     if body is None:
         return jsonify({'msg':'Body must be filled'}), 400
-    if 'email' not in body:
+    if 'email' not in body or body['email'] is None or body['email'] == '':
         return jsonify({'msg': 'Specify email'}), 400
     if User.query.filter_by(email= body['email']).first():
-        return jsonify({'msg': 'There is already an account associated with that email'}), 200
-    if 'password' not in body: 
+        return jsonify({'msg': 'There is already an account associated with that email'}), 400
+    if 'password' not in body or body['password'] is None or body['password'] == '':
         return jsonify({'msg': 'Specify password'}), 400
     pw_hash = bcrypt.generate_password_hash(body['password']).decode('utf-8')
     new_user = User()
@@ -102,9 +102,9 @@ def login():
     body = request.get_json(silent=True)
     if body is None:
         return jsonify({'msg':'Body must be filled'}), 400
-    if 'email' not in body:
+    if 'email' not in body  or body['email'] is None or body['email'] == '':
         return jsonify({'msg': 'Specify email'}), 400
-    if 'password' not in body: 
+    if 'password' not in body or body['password'] is None or body['password'] == '': 
         return jsonify({'msg': 'Specify password'}), 400
     user = User.query.filter_by(email = body['email']).first()
     if not user:

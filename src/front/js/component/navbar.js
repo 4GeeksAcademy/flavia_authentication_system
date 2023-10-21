@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/navbar.css"
+import { Context } from "../store/appContext";
 
 
 export const Navbar = () => {
+	const { store, actions } = useContext(Context)
+	const handleShowForm = () => {
+		actions.showForm()
+	}
+
 	return (
 		<nav className="navbar navbar-light bg-black">
 			<div className="container">
@@ -16,7 +22,7 @@ export const Navbar = () => {
 					</span>
 				</Link>
 				<div className="ml-auto">
-					<button type="button" className="nav_btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+					<button type="button" className="nav_btn" onClick={handleShowForm}>
 						<i className="fa-regular fa-user"></i> Sign in
 					</button>
 				</div>
